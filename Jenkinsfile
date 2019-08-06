@@ -3,11 +3,9 @@ pipeline {
   stages {
     stage('Upload to AWS.'){
       steps {
-        sh 'echo "Hello World"'
-        sh '''
-          echo "Multiline steps works too"
-          ls -lah
-        '''
+        withAWS(region:'eu-west-1',credentials:'aws-static') {
+              s3Upload(file:'index.html', bucket:'dmm-p4', path:'.')
+        }
       }
     }
   }
