@@ -4,7 +4,7 @@ pipeline {
     stage('Upload to AWS.'){
       steps {
         withAWS(region:'eu-west-1',credentials:'aws-static') {
-              s3Upload(file:'index.html', bucket:'dmm-p4', path:'./index.html')
+              s3Upload(bucket: 'dmm-p4', workingDir:'build', includePathPattern:'**/*');
         }
       }
     }
